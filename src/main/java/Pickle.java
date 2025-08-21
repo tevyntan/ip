@@ -3,40 +3,54 @@ import java.util.*;
 public class Pickle {
     private static String line = "________________________________________________";
     public static void main(String[] args) {
-        String[] list = new String[100];
+        ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         int counter = 0;
 
         System.out.println(line);
         System.out.println("Hello! I'm Pickle");
-        System.out.println("What can I do for you?\n");
+        System.out.println("What can I do for you?");
         System.out.println(line);
 
         while(sc.hasNextLine()) {
-            String input = sc.nextLine();
+            String inputs = sc.nextLine();
+            String[] input = inputs.split(" ");
 
 
-            if (input.equals("bye")) {
+            if (input[0].equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println(line);
                 break;
-            } else if (input.equals("list")) {
+            } else if (input[0].equals("list")) {
                 System.out.println(line);
                 int count = 1;
-                for (int i = 0; i < counter; i++){
-                    System.out.println(count + ". " + list[count - 1]);
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println(count + ". " + tasks.get(count - 1).toString());
                     count++;
                 }
+                System.out.println(line);
 
-
+            } else if (input[0].equals("mark")) {
+                System.out.println(line);
+                Task t = tasks.get(Integer.parseInt(input[1]) - 1);
+                t.mark();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(t.toString());
+                System.out.println(line);
+            } else if (input[0].equals("unmark")) {
+                System.out.println(line);
+                Task t = tasks.get(Integer.parseInt(input[1]) - 1);
+                t.unmark();
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println(t.toString());
                 System.out.println(line);
             } else {
                 System.out.println(line);
-                System.out.println("added: " + input);
-                list[counter] = input;
-                counter++;
+                System.out.println("added: " + inputs);
+                Task t = new Task(inputs);
+                tasks.add(t);
                 System.out.println(line);
-            }
+                }
 
          }
 
