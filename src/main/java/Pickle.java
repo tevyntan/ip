@@ -22,7 +22,11 @@ public class Pickle {
                     System.out.println(line);
                     break;
                 } else if (input[0].equals("list")) {
+                    if (tasks.isEmpty()) {
+                        throw new PickleException("Your list is empty. ");
+                    }
                     System.out.println(line);
+                    System.out.println("Here is your list:");
                     int count = 1;
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println(count + "." + tasks.get(count - 1).toString());
@@ -49,6 +53,18 @@ public class Pickle {
                     t.unmark();
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(t.toString());
+                    System.out.println(line);
+                } else if (input[0].equals("delete")) {
+                    if (input.length < 2 || input[1].trim().isEmpty() || Integer.parseInt(input[1]) > counter) {
+                        throw new PickleException("Please specify which task to delete....");
+                    }
+                    System.out.println(line);
+                    System.out.println("Ok! I've removed this task:");
+                    Task t =  tasks.get(Integer.parseInt(input[1]) -1);
+                    System.out.println(t.toString());
+                    tasks.remove(Integer.parseInt(input[1]) -1);
+                    counter--;
+                    System.out.println("You got " + counter + " tasks in the list.");
                     System.out.println(line);
                 } else if (input[0].equals("todo")) {
                     if (input.length < 2 || input[1].trim().isEmpty()) {

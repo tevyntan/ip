@@ -8,6 +8,7 @@ Aights. Task added:
 You got 1 tasks in the list.
 ________________________________________________
 ________________________________________________
+Here is your list:
 1.[T][ ] borrow book
 ________________________________________________
 ________________________________________________
@@ -25,6 +26,7 @@ Aights. Task added:
 You got 3 tasks in the list.
 ________________________________________________
 ________________________________________________
+Here is your list:
 1.[T][X] borrow book
 2.[D][ ] return book (by: sunday)
 3.[E][ ] project meeting (from: 2pm to: 4pm)
@@ -38,6 +40,7 @@ OK, I've marked this task as not done yet:
 [T][ ] borrow book
 ________________________________________________
 ________________________________________________
+Here is your list:
 1.[T][ ] borrow book
 2.[D][X] return book (by: sunday)
 3.[E][ ] project meeting (from: 2pm to: 4pm)
@@ -50,6 +53,16 @@ Yikes!!! My bad, I don't know what that means. Try Again!!!
 ________________________________________________
 ________________________________________________
 Yikes!!! I'm sorry, I'm not sure what you meant. Format should be deadline <description> /by <date> Try Again!!!
+________________________________________________
+________________________________________________
+Ok! I've removed this task:
+[D][X] return book (by: sunday)
+You got 2 tasks in the list.
+________________________________________________
+________________________________________________
+Here is your list:
+1.[T][ ] borrow book
+2.[E][ ] project meeting (from: 2pm to: 4pm)
 ________________________________________________
 Bye. Hope you have a nice day!
 ________________________________________________
