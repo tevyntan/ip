@@ -8,7 +8,7 @@ public class Pickle {
         int counter = 0;
 
         System.out.println(line);
-        System.out.println("Hello! I'm Pickle");
+        System.out.println("Good Morning! I'm Pickle");
         System.out.println("What can I do for you?");
         System.out.println(line);
 
@@ -18,7 +18,7 @@ public class Pickle {
 
 
             if (input[0].equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println("Bye. Hope you have a nice day!");
                 System.out.println(line);
                 break;
             } else if (input[0].equals("list")) {
