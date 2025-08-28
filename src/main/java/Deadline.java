@@ -7,6 +7,15 @@ public class Deadline extends Task{
         this.date = date;
     }
 
+    public String type() {
+        return "D";
+    }
+
+    public String fileAdd() {
+        String state = super.isStatus() ? "1" : "0";
+        return "D | " + state + " | " + getDescription() + " " + this.date;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by:" + date + ")";

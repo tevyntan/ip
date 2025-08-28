@@ -1,8 +1,12 @@
+import java.io.IOException;
 import java.util.*;
 
 public class Pickle {
+
+
     private static String line = "________________________________________________";
     public static void main(String[] args) {
+        Storage storage = new Storage();
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         int counter = 0;
@@ -114,6 +118,13 @@ public class Pickle {
                 System.out.println(line);
                 System.out.println("Yikes!!! " + e.getMessage() + " Try Again!!!");
                 System.out.println(line);
+            } finally {
+                try {
+                    storage.save(tasks);
+                } catch (IOException io) {
+                    System.out.println("ERROR!!" + io.getMessage());
+                }
+
             }
          }
 

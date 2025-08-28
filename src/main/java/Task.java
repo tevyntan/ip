@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String description;
     private boolean status;
 
@@ -8,12 +8,26 @@ public class Task {
     }
 
     public void mark() {
-            status = true;
+        status = true;
     }
 
     public void unmark() {
         status = false;
     }
+
+    public boolean isStatus() {
+        return this.status;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String type() {
+        return " ";
+    }
+
+    public abstract String fileAdd();
 
     @Override
     public String toString() {
