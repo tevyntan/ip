@@ -1,9 +1,12 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Pickle {
 
-
+    private static final DateTimeFormatter IN_OUT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static String line = "________________________________________________";
     public static void main(String[] args) {
         Storage storage = new Storage();
@@ -95,13 +98,19 @@ public class Pickle {
                         throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be deadline " +
                                 "<description> /by <date>");
                     }
-                    System.out.println(line);
-                    counter++;
-                    System.out.println("Aights. Task added:");
+
                     String[] d = input[1].split("/by");
+                    try {
+                        LocalDateTime.parse(d[1].trim(), IN_OUT).withSecond(0).withNano(0);
+                    } catch (DateTimeParseException ignore) {
+                        throw new PickleException("Use format yyyy-MM-dd HHmm, e.g., 2019-12-02 1800");
+                    }
                     Task t = new Deadline(d[0], d[1]);
                     tasks.add(t);
+                    counter++;
+                    System.out.println(line);
                     System.out.println(t.toString());
+                    System.out.println("Aights. Task added:");
                     System.out.println("You got " + counter + " tasks in the list.");
                     System.out.println(line);
                 } else if (input[0].equals("event")) {
@@ -109,11 +118,18 @@ public class Pickle {
                         throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be event " +
                                 "<description> /from <time> /to <time>");
                     }
+                    String[] d = input[1].split("/from");
+                    String[] e = d[1].split("/to");
+                    try {
+                        LocalDateTime.parse(e[0].trim(), IN_OUT).withSecond(0).withNano(0);
+                        LocalDateTime.parse(e[1].trim(), IN_OUT).withSecond(0).withNano(0);
+                    } catch (DateTimeParseException ignore) {
+                        throw new PickleException("Use format yyyy-MM-dd HHmm, e.g., 2019-12-02 1800");
+                    }
                     System.out.println(line);
                     counter++;
                     System.out.println("Aights. Task added:");
-                    String[] d = input[1].split("/from");
-                    String[] e = d[1].split("/to");
+
                     Task t = new Event(d[0], e[0], e[1]);
                     tasks.add(t);
                     System.out.println(t.toString());
