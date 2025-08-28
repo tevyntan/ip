@@ -7,9 +7,17 @@ public class Pickle {
     private static String line = "________________________________________________";
     public static void main(String[] args) {
         Storage storage = new Storage();
+
         ArrayList<Task> tasks = new ArrayList<>();
+
+        try {
+            tasks = storage.load();
+        } catch (IOException io) {
+            System.out.println("ERROR" + io.getMessage());
+        }
+
         Scanner sc = new Scanner(System.in);
-        int counter = 0;
+        int counter = tasks.size();
 
         System.out.println(line);
         System.out.println("Good Morning! I'm Pickle");

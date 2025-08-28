@@ -15,7 +15,7 @@ public class Event extends Task{
 
     public String fileAdd() {
         String state = super.isStatus() ? "1" : "0";
-        return "D | " + state + " | " + getDescription() + " " + this.from + " " + this.to;
+        return "E | " + state + " | " + getDescription() + " | " + this.from + " | " + this.to;
     }
 
     @Override

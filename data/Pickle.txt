@@ -1,1 +1,2 @@
-T | 0| hi
+T | 1 | hi
+D | 0 | bookings | 5pm

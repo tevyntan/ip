@@ -13,7 +13,7 @@ public class Deadline extends Task{
 
     public String fileAdd() {
         String state = super.isStatus() ? "1" : "0";
-        return "D | " + state + " | " + getDescription() + " " + this.date;
+        return "D | " + state + " | " + getDescription() + " | " + this.date;
     }
 
     @Override
