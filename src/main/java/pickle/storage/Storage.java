@@ -19,14 +19,14 @@ import java.util.List;
  */
 public class Storage {
 
-    private final Path FILE_LOCATION;
+    private final Path fileLocation;
 
     /**
      * Creates and instance of the storage.
      * @param filePath the file path used to store the list of tasks.
      */
     public Storage(String filePath){
-        this.FILE_LOCATION = Paths.get(filePath);
+        this.fileLocation = Paths.get(filePath);
 
     }
 
@@ -45,7 +45,7 @@ public class Storage {
             lists.add(line);
         }
 
-        Files.write(FILE_LOCATION, lists, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        Files.write(fileLocation, lists, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
 
     }
 
@@ -58,14 +58,14 @@ public class Storage {
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         List<String> empty = new ArrayList<>();
-        Files.createDirectories(FILE_LOCATION.getParent());
+        Files.createDirectories(fileLocation.getParent());
 
-        if (!Files.exists(FILE_LOCATION)) {
-            Files.write(FILE_LOCATION, empty, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        if (!Files.exists(fileLocation)) {
+            Files.write(fileLocation, empty, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
             return tasks;
         }
 
-        for (String line : Files.readAllLines(FILE_LOCATION)) {
+        for (String line : Files.readAllLines(fileLocation)) {
             if (line == null || line.isBlank()) {
                 continue;
             }

@@ -22,7 +22,7 @@ public class ToDos extends Task{
      * @return a string to save the file
      */
     public String fileAdd() {
-        String state = super.isStatus() ? "1" : "0";
+        String state = super.isComplete() ? "1" : "0";
         return "T | " + state + " | " + getDescription();
     }
 
