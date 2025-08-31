@@ -111,6 +111,21 @@ public class Parser {
                     ui.showTaskAdded(t, tasks.size());
                     return false;
                 }
+                case "find" : {
+                    if (rests.isBlank()) {
+                        throw new PickleException("No keyword to find....");
+                    }
+                    String keyword = rests.toLowerCase();
+                    int i = 1;
+                    ui.showFind();
+                    for (Task t : tasks.all()) {
+                        if (t.getDescription().toLowerCase().contains(keyword)) {
+                            ui.show(i + ". " + t.toString());
+                        }
+                        i++;
+                    }
+                    return false;
+                }
 
                 default:
                     ui.showError("My bad, I don't know what that means.");
