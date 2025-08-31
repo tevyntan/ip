@@ -38,6 +38,6 @@ public class Event extends Task{
     public String toString() {
         String outputFrom = from.toLocalDate().format(OUT_DATE) + ", " + from.toLocalTime().format(OUT_TIME);
         String outputTo = to.toLocalDate().format(OUT_DATE) + ", " + to.toLocalTime().format(OUT_TIME);
-        return "[E]" + super.toString() + "(from: " + outputFrom + " to: " + outputTo + ")";
+        return "[E]" + super.toString() + " (from: " + outputFrom + " to: " + outputTo + ")";
     }
 }

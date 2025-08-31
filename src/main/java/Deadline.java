@@ -38,6 +38,6 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         String output = date.toLocalDate().format(OUT_DATE) + ", " + date.toLocalTime().format(OUT_TIME);
-        return "[D]" + super.toString() + "(by: " + output + ")";
+        return "[D]" + super.toString() + " (by: " + output + ")";
     }
 }
