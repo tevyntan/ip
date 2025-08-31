@@ -5,14 +5,24 @@ import pickle.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles all user interface inputs and outputs for Pickle.
+ */
 public class Ui {
     private final Scanner sc = new Scanner(System.in);
     private static String line = "________________________________________________";
 
+    /**
+     * Using scanner to read the command given by the user.
+     * @return
+     */
     public String readComment() {
         return sc.nextLine().trim();
     }
 
+    /**
+     * Prints a greeting when Pickle is first ran.
+     */
     public void showWelcome() {
         System.out.println(line);
         System.out.println("Good Morning! I'm Pickle");
@@ -20,26 +30,33 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Prints a line to seperate each command.
+     */
     public void showLine() {
         System.out.println(line);
     }
 
+    /**
+     * Prints a goodbye message when the user terminates Pickle.
+     */
     public void showBye() {
         System.out.println("Bye. Hope you have a nice day!");
 
     }
 
-    public void show(String msg) {
-        System.out.println(msg);
-    }
-    public void showAdded(String msg) {
-        System.out.println(msg);
-    }
-
+    /**
+     * Prints out an error message due to invalid input.
+     * @param msg Specific message tied to each error.
+     */
     public void showError(String msg) {
         System.out.println("Yikes!!!" + msg + "  Try Again!!");
     }
 
+    /**
+     * Prints the list of tasks.
+     * @param tasks List of tasks.
+     */
     public void showList(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
             System.out.println("List empty! There is nothing to do....");
@@ -51,6 +68,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the task that is added.
+     * @param t Task added.
+     * @param size Size of list of task.
+     */
     public void showTaskAdded(Task t, int size) {
 
         System.out.println("Aights. pickle.task.Task added:");
@@ -59,6 +81,11 @@ public class Ui {
 
     }
 
+    /**
+     * Prints the task deleted.
+     * @param t Task deleted.
+     * @param size Size of list of tasks.
+     */
     public void showTaskDeleted(Task t, int size) {
 
         System.out.println("Ok! I've removed this task:");
@@ -67,6 +94,10 @@ public class Ui {
 
     }
 
+    /**
+     * Print task that is marked.
+     * @param t Task to be marked.
+     */
     public void showMarked(Task t) {
 
         System.out.println("Nice! I've marked this task as done:");
@@ -74,6 +105,10 @@ public class Ui {
 
     }
 
+    /**
+     * Print task that is unmarked.
+     * @param t Task to be unmarked.
+     */
     public void showUnmarked(Task t) {
 
         System.out.println("OK, I've marked this task as not done yet:");
