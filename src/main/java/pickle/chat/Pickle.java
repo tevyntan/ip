@@ -16,7 +16,7 @@ public class Pickle {
 
     public Pickle(String filePath) {
         this.ui = new Ui();
-        this.storage = new Storage();
+        this.storage = new Storage(filePath);
 
         try {
             this.tasks = new TaskList(storage.load());
