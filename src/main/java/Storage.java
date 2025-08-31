@@ -58,7 +58,7 @@ public class Storage {
                 }
 
                 case "D" : {
-                    Task t = new Deadline(parts[2] + " ", " " + parts[3]);
+                    Task t = new Deadline(parts[2],parts[3]);
                     if (done) {
                         t.mark();
                     }
@@ -67,7 +67,7 @@ public class Storage {
                 }
 
                 case "E" : {
-                    Task t = new Event(parts[2] + " ", " " + parts[3] + " ", " " + parts[4] + " ");
+                    Task t = new Event(parts[2], parts[3], parts[4]);
                     if (done) {
                         t.mark();
                     }
