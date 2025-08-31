@@ -31,7 +31,7 @@ public class Event extends Task{
     }
 
     public String fileAdd() {
-        String state = super.isStatus() ? "1" : "0";
+        String state = super.isComplete() ? "1" : "0";
         return "E | " + state + " | " + getDescription() + " | " + this.from.format(IN_OUT) + " | " + this.to.format(IN_OUT);
     }
 

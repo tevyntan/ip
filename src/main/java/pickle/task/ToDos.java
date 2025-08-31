@@ -11,7 +11,7 @@ public class ToDos extends Task{
     }
 
     public String fileAdd() {
-        String state = super.isStatus() ? "1" : "0";
+        String state = super.isComplete() ? "1" : "0";
         return "T | " + state + " | " + getDescription();
     }
 

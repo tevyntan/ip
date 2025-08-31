@@ -2,23 +2,23 @@ package pickle.task;
 
 public abstract class Task {
     private String description;
-    private boolean status;
+    private boolean isComplete;
 
     public Task(String description) {
         this.description = description;
-        this.status = false;
+        this.isComplete = false;
     }
 
     public void mark() {
-        status = true;
+        isComplete = true;
     }
 
     public void unmark() {
-        status = false;
+        isComplete = false;
     }
 
-    public boolean isStatus() {
-        return this.status;
+    public boolean isComplete() {
+        return this.isComplete;
     }
 
     public String getDescription() {
@@ -34,7 +34,7 @@ public abstract class Task {
     @Override
     public String toString() {
         String symbol = " ";
-        if (status) {
+        if (isComplete) {
             symbol = "X";
         }
         return "[" + symbol + "] " + description;
