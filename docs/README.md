@@ -1,4 +1,4 @@
-# Pickle User Guide
+# pickle.chat.Pickle User Guide
 
 // Update the title above to match the actual product name
 

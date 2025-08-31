@@ -1,9 +1,9 @@
 ________________________________________________
-Good Morning! I'm Pickle
+Good Morning! I'm pickle.chat.Pickle
 What can I do for you?
 ________________________________________________
 ________________________________________________
-Aights. Task added:
+Aights. pickle.task.Task added:
 [T][ ] borrow book
 You got 1 tasks in the list.
 ________________________________________________
@@ -16,12 +16,12 @@ Nice! I've marked this task as done:
 [T][X] borrow book
 ________________________________________________
 ________________________________________________
-Aights. Task added:
+Aights. pickle.task.Task added:
 [D][ ] return book (by: sunday)
 You got 2 tasks in the list.
 ________________________________________________
 ________________________________________________
-Aights. Task added:
+Aights. pickle.task.Task added:
 [E][ ] project meeting (from: 2pm to: 4pm)
 You got 3 tasks in the list.
 ________________________________________________

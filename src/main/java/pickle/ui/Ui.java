@@ -1,5 +1,8 @@
+package pickle.ui;
+
+import pickle.task.Task;
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -50,7 +53,7 @@ public class Ui {
 
     public void showTaskAdded(Task t, int size) {
 
-        System.out.println("Aights. Task added:");
+        System.out.println("Aights. pickle.task.Task added:");
         System.out.println(t.toString());
         System.out.println("You got " + size + " tasks in the list.");
 

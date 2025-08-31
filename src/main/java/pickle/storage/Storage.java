@@ -1,3 +1,10 @@
+package pickle.storage;
+
+import pickle.task.Task;
+import pickle.task.ToDos;
+import pickle.task.Event;
+import pickle.task.Deadline;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
