@@ -45,6 +45,17 @@ public class Ui {
 
     }
 
+    public void showFind() {
+        System.out.println("Is this what u are looking for??");
+    }
+
+    public void show(String msg) {
+        System.out.println(msg);
+    }
+    public void showAdded(String msg) {
+        System.out.println(msg);
+    }
+
     /**
      * Prints out an error message due to invalid input.
      * @param msg Specific message tied to each error.

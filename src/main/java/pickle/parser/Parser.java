@@ -62,6 +62,21 @@ public class Parser {
                 if (input.length < 2 || rests.trim().isEmpty()) {
                     throw new PickleException("Please specify which task to unmark....");
                 }
+                case "find" : {
+                    if (rests.isBlank()) {
+                        throw new PickleException("No keyword to find....");
+                    }
+                    String keyword = rests.toLowerCase();
+                    int i = 1;
+                    ui.showFind();
+                    for (Task t : tasks.all()) {
+                        if (t.getDescription().toLowerCase().contains(keyword)) {
+                            ui.show(i + ". " + t.toString());
+                        }
+                        i++;
+                    }
+                    return false;
+                }
 
                 Task t = tasks.get(Integer.parseInt(rests));
                 t.unmark();
