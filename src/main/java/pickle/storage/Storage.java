@@ -15,9 +15,11 @@ import java.util.List;
 
 public class Storage {
 
-    private final Path FILE_LOCATION = Paths.get("data", "Pickle.txt");
+    private final Path FILE_LOCATION;
 
-    public Storage(){
+    public Storage(String filePath){
+        this.FILE_LOCATION = Paths.get(filePath);
+
     }
 
     public void save(ArrayList<Task> list) throws IOException {
