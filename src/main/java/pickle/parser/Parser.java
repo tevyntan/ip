@@ -14,10 +14,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses a single line of command and executes the intended action.
+ */
 public class Parser {
 
     private static final DateTimeFormatter IN_OUT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
+    /**
+     * Parses and executes the intended command.
+     * @param inputs line typed by the user that is scanned by the ui.
+     * @param tasks List of task that Pickle currently has saved.
+     * @param ui User interface to print the messages.
+     * @param storage storage used to store the list in a text file
+     * @return true if the command is "bye" in order to exit the loop in Pickle
+     */
     public static boolean parse(String inputs, TaskList tasks, Ui ui, Storage storage) {
         if (inputs.isEmpty()) {
             ui.showError("U did not say anything???");

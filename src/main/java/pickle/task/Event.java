@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Creates an event task
+ * Displays the event date in a more readable fashion.
+ */
 public class Event extends Task{
 
     private LocalDateTime from;
@@ -17,6 +21,12 @@ public class Event extends Task{
     private static final DateTimeFormatter OUT_TIME = DateTimeFormatter.ofPattern("h:mma");
 
 
+    /**
+     * Creates an instance of an event.
+     * @param description information of event.
+     * @param from timing of start of event.
+     * @param to timing of end of event.
+     */
     public Event(String description, String from, String to) {
         super(description);
         try {
@@ -30,6 +40,10 @@ public class Event extends Task{
         return "E";
     }
 
+    /**
+     * Format to save the file into the storage text file.
+     * @return a string to save the file
+     */
     public String fileAdd() {
         String state = super.isStatus() ? "1" : "0";
         return "E | " + state + " | " + getDescription() + " | " + this.from.format(IN_OUT) + " | " + this.to.format(IN_OUT);

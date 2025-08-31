@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A task with a deadline.
+ * Displays the deadline date in a more readable fashion.
+ */
 public class Deadline extends Task{
 
     private LocalDateTime date;
@@ -14,6 +18,11 @@ public class Deadline extends Task{
     private static final DateTimeFormatter OUT_DATE = DateTimeFormatter.ofPattern("MMM d yyyy");
     private static final DateTimeFormatter OUT_TIME = DateTimeFormatter.ofPattern("h:mma");
 
+    /**
+     * Creates a deadline.
+     * @param description information of the task.
+     * @param date deadline due date.
+     */
     public Deadline(String description, LocalDateTime date) {
         super(description);
         this.date = date;
@@ -31,6 +40,10 @@ public class Deadline extends Task{
         return "D";
     }
 
+    /**
+     * Format to save the file into the storage text file.
+     * @return a string to save the file
+     */
     public String fileAdd() {
 
         String state = super.isStatus() ? "1" : "0";

@@ -13,15 +13,28 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Saves the list of tasks into a text file.
+ * Loads the list of tasks by an existing text file to keep track of tasks that the user has to do.
+ */
 public class Storage {
 
     private final Path FILE_LOCATION;
 
+    /**
+     * Creates and instance of the storage.
+     * @param filePath the file path used to store the list of tasks.
+     */
     public Storage(String filePath){
         this.FILE_LOCATION = Paths.get(filePath);
 
     }
 
+    /**
+     * Saves the given tasks list into the disk via a text file.
+     * @param list tasks to save.
+     * @throws IOException if the saving fails.
+     */
     public void save(ArrayList<Task> list) throws IOException {
         Files.createDirectories(Paths.get("data"));
 
@@ -36,6 +49,12 @@ public class Storage {
 
     }
 
+    /**
+     * Load the list of tasks from a pre-existing text file.
+     * Return empty list if text file does not exist.
+     * @return tasks loaded from the disk.
+     * @throws IOException if reading the file fails.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         List<String> empty = new ArrayList<>();

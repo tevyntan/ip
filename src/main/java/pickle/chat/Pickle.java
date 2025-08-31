@@ -7,6 +7,11 @@ import pickle.parser.Parser;
 
 import java.io.IOException;
 
+/**
+ * Start of Pickle Chatbot
+ * Pickle chatbot allows users to add, remove, mark and unmark tasks to do in a list
+ * Such tasks include, todos, deadlines and events.
+ */
 public class Pickle {
 
     private TaskList tasks;
@@ -14,6 +19,11 @@ public class Pickle {
     private Ui ui;
     private static String line = "________________________________________________";
 
+    /**
+     * Creates a new instance of the Pickle application.
+     *
+     * @param filePath the file path where all tasks are save into and loaded from.
+     */
     public Pickle(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -27,6 +37,11 @@ public class Pickle {
 
     }
 
+    /**
+     * Runs the main body of the Pickle Chatbot.
+     * Creates a loop that constantly accepts inputs by the user.
+     *
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -45,6 +60,11 @@ public class Pickle {
         }
     }
 
+    /**
+     * Begins the Pickle Chatbot application.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Pickle("data/Pickle.txt").run();
     }
