@@ -4,6 +4,9 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
+group = 'pickle'
+version = '1.0.0'
+
 repositories {
     mavenCentral()
 }
@@ -28,7 +31,7 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass.set("pickle.chat.Pickle")
 }
 
 shadowJar {
