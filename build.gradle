@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'checkstyle'
 }
 
 group = 'pickle'
@@ -53,6 +54,10 @@ shadowJar {
     archiveFileName = "Pickle.jar"
     archiveBaseName = "duke"
     archiveClassifier = null
+}
+
+checkstyle {
+    toolVersion = '11.0.0'
 }
 
 run{

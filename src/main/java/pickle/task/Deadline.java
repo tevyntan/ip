@@ -8,9 +8,7 @@ import java.time.format.DateTimeParseException;
  * A task with a deadline.
  * Displays the deadline date in a more readable fashion.
  */
-public class Deadline extends Task{
-
-    private LocalDateTime date;
+public class Deadline extends Task {
     // SINGLE accepted input/storage format: "yyyy-MM-dd HHmm" (e.g., 2019-12-02 1800)
     private static final DateTimeFormatter IN_OUT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
@@ -18,21 +16,29 @@ public class Deadline extends Task{
     private static final DateTimeFormatter OUT_DATE = DateTimeFormatter.ofPattern("MMM d yyyy");
     private static final DateTimeFormatter OUT_TIME = DateTimeFormatter.ofPattern("h:mma");
 
+    private LocalDateTime date;
     /**
      * Creates a deadline.
      * @param description information of the task.
-     * @param date deadline due date.
+     * @param date deadline due date in LocalDateTime format.
      */
     public Deadline(String description, LocalDateTime date) {
         super(description);
         this.date = date;
     }
+
+    /**
+     * Creates a deadline.
+     * @param description information of the task.
+     * @param date deadline due date in string format.
+     */
     public Deadline(String description, String date) {
         super(description);
 
         try {
             this.date = LocalDateTime.parse(date.trim(), IN_OUT).withSecond(0).withNano(0);
         } catch (DateTimeParseException ignore) {
+            return;
         }
     }
 

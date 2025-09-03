@@ -3,7 +3,7 @@ package pickle.task;
 /**
  * A task that needs to be done with no specific due date.
  */
-public class ToDos extends Task{
+public class ToDos extends Task {
 
     /**
      * Creates a TODO task.
