@@ -1,11 +1,13 @@
 package pickle.chat;
 
-import pickle.ui.Ui;
+import java.io.IOException;
+
+import pickle.parser.Parser;
 import pickle.storage.Storage;
 import pickle.task.TaskList;
-import pickle.parser.Parser;
+import pickle.ui.Ui;
 
-import java.io.IOException;
+
 
 /**
  * Start of Pickle Chatbot
@@ -14,10 +16,10 @@ import java.io.IOException;
  */
 public class Pickle {
 
+    private static final String line = "________________________________________________";
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
-    private static String line = "________________________________________________";
 
     /**
      * Creates a new instance of the Pickle application.
@@ -63,9 +65,9 @@ public class Pickle {
     public String getResponse(String input) {
 
         try {
-            return Parser.parseGUI(input, tasks, ui, storage);
-        }catch (Exception e) {
-            return ui.showErrorGUI(e.getMessage());
+            return Parser.parseGui(input, tasks, ui, storage);
+        } catch (Exception e) {
+            return ui.showErrorGui(e.getMessage());
         }
     }
 

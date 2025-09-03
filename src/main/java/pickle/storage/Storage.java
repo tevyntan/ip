@@ -1,10 +1,5 @@
 package pickle.storage;
 
-import pickle.task.Task;
-import pickle.task.ToDos;
-import pickle.task.Event;
-import pickle.task.Deadline;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,6 +7,12 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+
+import pickle.task.Deadline;
+import pickle.task.Event;
+import pickle.task.Task;
+import pickle.task.ToDos;
+
 
 /**
  * Saves the list of tasks into a text file.
@@ -25,7 +26,7 @@ public class Storage {
      * Creates and instance of the storage.
      * @param filePath the file path used to store the list of tasks.
      */
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.fileLocation = Paths.get(filePath);
 
     }
@@ -76,7 +77,7 @@ public class Storage {
             boolean done = parts[1].equals("1");
 
             switch(type) {
-            case "T" : {
+            case "T": {
                 Task t = new ToDos(parts[2]);
                 if (done) {
                     t.mark();
@@ -85,8 +86,8 @@ public class Storage {
                 break;
             }
 
-            case "D" : {
-                Task t = new Deadline(parts[2],parts[3]);
+            case "D": {
+                Task t = new Deadline(parts[2], parts[3]);
                 if (done) {
                     t.mark();
                 }
@@ -94,7 +95,7 @@ public class Storage {
                 break;
             }
 
-            case "E" : {
+            case "E": {
                 Task t = new Event(parts[2], parts[3], parts[4]);
                 if (done) {
                     t.mark();

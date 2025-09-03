@@ -1,9 +1,16 @@
 package pickle.task;
 
+/**
+ * Abstract class of a Task to have all the basic methods that a task can execute.
+ */
 public abstract class Task {
     private String description;
     private boolean isComplete;
 
+    /**
+     * Constructor of a Task.
+     * @param description information of what the Task is.
+     */
     public Task(String description) {
         this.description = description;
         this.isComplete = false;

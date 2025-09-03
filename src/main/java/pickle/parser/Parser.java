@@ -1,18 +1,18 @@
 package pickle.parser;
 
-import pickle.ui.Ui;
-import pickle.storage.Storage;
-import pickle.task.TaskList;
-import pickle.task.Task;
-import pickle.task.ToDos;
-import pickle.task.Deadline;
-import pickle.task.Event;
-import pickle.exception.PickleException;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import pickle.exception.PickleException;
+import pickle.storage.Storage;
+import pickle.task.Deadline;
+import pickle.task.Event;
+import pickle.task.Task;
+import pickle.task.TaskList;
+import pickle.task.ToDos;
+import pickle.ui.Ui;
 
 /**
  * Parses a single line of command and executes the intended action.
@@ -91,8 +91,8 @@ public class Parser {
             case "deadline": {
                 String[] desc = (rests == null) ? new String[0] : rests.split("\\s*/by\\s*", 2);
                 if (desc.length < 2 || desc[0].isBlank() || desc[1].isBlank()) {
-                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be deadline " +
-                            "<description> /by <date>");
+                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be deadline "
+                            + "<description> /by <date>");
                 }
                 try {
                     LocalDateTime.parse(desc[1].trim(), IN_OUT).withSecond(0).withNano(0);
@@ -106,8 +106,8 @@ public class Parser {
             }
             case "event": {
                 if (input.length < 2 || !rests.contains("/from") || !rests.contains("/to") || rests == null) {
-                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be event " +
-                            "<description> /from <time> /to <time>");
+                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be event "
+                            + "<description> /from <time> /to <time>");
                 }
                 String[] d = input[1].split("\\s*/from\\s*", 2);
                 String[] e = d[1].split("\\s*/to\\s*", 2);
@@ -122,7 +122,7 @@ public class Parser {
                 ui.showTaskAdded(t, tasks.size());
                 return false;
             }
-            case "find" : {
+            case "find": {
                 if (rests.isBlank()) {
                     throw new PickleException("No keyword to find....");
                 }
@@ -165,9 +165,9 @@ public class Parser {
      * @param storage storage used to store the list in a text file
      * @return true if the command is "bye" in order to exit the loop in Pickle
      */
-    public static String parseGUI(String inputs, TaskList tasks, Ui ui, Storage storage) {
+    public static String parseGui(String inputs, TaskList tasks, Ui ui, Storage storage) {
         if (inputs.isEmpty()) {
-            ui.showErrorGUI("U did not say anything???");
+            ui.showErrorGui("U did not say anything???");
         }
         String line = inputs.trim();
         String[] input = line.split("\\s+", 2);
@@ -177,12 +177,12 @@ public class Parser {
         try {
             switch (command) {
             case "bye":
-                return ui.showByeGUI();
+                return ui.showByeGui();
 
 
 
             case "list":
-                return ui.showListGUI(tasks.all());
+                return ui.showListGui(tasks.all());
 
 
             case "mark": {
@@ -191,7 +191,7 @@ public class Parser {
                 }
                 Task t = tasks.get(Integer.parseInt(rests));
                 t.mark();
-                return ui.showMarkedGUI(t);
+                return ui.showMarkedGui(t);
 
             }
             case "unmark": {
@@ -201,7 +201,7 @@ public class Parser {
 
                 Task t = tasks.get(Integer.parseInt(rests));
                 t.unmark();
-                return ui.showUnmarkedGUI(t);
+                return ui.showUnmarkedGui(t);
 
             }
             case "delete": {
@@ -211,7 +211,7 @@ public class Parser {
 
                 Task t = tasks.get(Integer.parseInt(rests));
                 tasks.delete(Integer.parseInt(rests));
-                return ui.showTaskDeletedGUI(t, tasks.size());
+                return ui.showTaskDeletedGui(t, tasks.size());
 
             }
             case "todo": {
@@ -220,14 +220,14 @@ public class Parser {
                 }
                 Task t = new ToDos(rests.trim());
                 tasks.add(t);
-                return ui.showTaskAddedGUI(t, tasks.size());
+                return ui.showTaskAddedGui(t, tasks.size());
 
             }
             case "deadline": {
                 String[] desc = (rests == null) ? new String[0] : rests.split("\\s*/by\\s*", 2);
                 if (desc.length < 2 || desc[0].isBlank() || desc[1].isBlank()) {
-                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be deadline " +
-                            "<description> /by <date>");
+                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be deadline "
+                            + "<description> /by <date>");
                 }
                 try {
                     LocalDateTime.parse(desc[1].trim(), IN_OUT).withSecond(0).withNano(0);
@@ -236,13 +236,13 @@ public class Parser {
                 }
                 Task t = new Deadline(desc[0].trim(), desc[1].trim());
                 tasks.add(t);
-                return ui.showTaskAddedGUI(t, tasks.size());
+                return ui.showTaskAddedGui(t, tasks.size());
 
             }
             case "event": {
                 if (input.length < 2 || !rests.contains("/from") || !rests.contains("/to") || rests == null) {
-                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be event " +
-                            "<description> /from <time> /to <time>");
+                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be event "
+                            + "<description> /from <time> /to <time>");
                 }
                 String[] d = input[1].split("\\s*/from\\s*", 2);
                 String[] e = d[1].split("\\s*/to\\s*", 2);
@@ -254,19 +254,19 @@ public class Parser {
                 }
                 Task t = new Event(d[0].trim(), e[0].trim(), e[1].trim());
                 tasks.add(t);
-                return ui.showTaskAddedGUI(t, tasks.size());
+                return ui.showTaskAddedGui(t, tasks.size());
 
             }
-            case "find" : {
+            case "find": {
                 if (rests.isBlank()) {
                     throw new PickleException("No keyword to find....");
                 }
                 String keyword = rests.toLowerCase();
                 int i = 1;
-                String output = ui.showFindGUI() + "\n";
+                String output = ui.showFindGui() + "\n";
                 for (Task t : tasks.all()) {
                     if (t.getDescription().toLowerCase().contains(keyword)) {
-                        output = output + ui.showGUI(i + ". " + t.toString() + "\n");
+                        output = output + ui.showGui(i + ". " + t.toString() + "\n");
                         i++;
                     }
 
@@ -276,11 +276,11 @@ public class Parser {
             }
 
             default:
-                return ui.showErrorGUI("My bad, I don't know what that means.");
+                return ui.showErrorGui("My bad, I don't know what that means.");
 
             }
         } catch (PickleException e) {
-            return ui.showErrorGUI(e.getMessage());
+            return ui.showErrorGui(e.getMessage());
 
         } finally {
             try {

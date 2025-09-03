@@ -1,21 +1,23 @@
 package pickle.storage;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import pickle.task.*;
-
-import java.nio.file.Path;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Path;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import pickle.task.Deadline;
+import pickle.task.TaskList;
+import pickle.task.ToDos;
 
 class StorageTest {
 
     @TempDir Path tmp;
 
     @Test
-    void save_then_load_restoresTasks() throws Exception {
+    void saveThenLoadRestoresTasks() throws Exception {
         Storage storage = new Storage(tmp.resolve("tasks.txt").toString());
 
         TaskList list = new TaskList();
@@ -33,7 +35,7 @@ class StorageTest {
     }
 
     @Test
-    void load_fileMissing() throws Exception {
+    void loadFileMissing() throws Exception {
         Storage storage = new Storage(tmp.resolve("empty.txt").toString());
         TaskList loaded = new TaskList(storage.load());
         assertEquals(0, loaded.size());

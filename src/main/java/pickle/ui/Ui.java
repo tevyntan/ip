@@ -1,16 +1,16 @@
 package pickle.ui;
 
-import pickle.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import pickle.task.Task;
 
 /**
  * Handles all user interface inputs and outputs for Pickle.
  */
 public class Ui {
-    private final Scanner sc = new Scanner(System.in);
     private static String line = "________________________________________________";
+    public final Scanner sc = new Scanner(System.in);
 
     /**
      * Using scanner to read the command given by the user.
@@ -36,9 +36,8 @@ public class Ui {
      * Prints a greeting when Pickle is first ran.
      * For GUI.
      */
-    public String showWelcomeGUI() {
-        return "Good Morning! I'm Pickle\n" +
-        "What can I do for you?";
+    public String showWelcomeGui() {
+        return "Good Morning! I'm Pickle\n" + "What can I do for you?";
     }
 
     /**
@@ -63,7 +62,7 @@ public class Ui {
      * Prints a goodbye message when the user terminates Pickle.
      * For GUI.
      */
-    public String showByeGUI() {
+    public String showByeGui() {
         return "Bye. Hope you have a nice day!";
 
     }
@@ -80,7 +79,7 @@ public class Ui {
      * Prints a message to show user what they are looking for.
      * For GUI.
      */
-    public String showFindGUI() {
+    public String showFindGui() {
         return "Is this what u are looking for??";
     }
 
@@ -98,7 +97,7 @@ public class Ui {
      * For GUI.
      * @param msg Inputted message to print.
      */
-    public String showGUI(String msg) {
+    public String showGui(String msg) {
         return msg;
     }
 
@@ -117,7 +116,7 @@ public class Ui {
      * For GUI.
      * @param msg Specific message tied to each error.
      */
-    public String showErrorGUI(String msg) {
+    public String showErrorGui(String msg) {
         return "Yikes!!!" + msg + "  Try Again!!";
     }
 
@@ -142,7 +141,7 @@ public class Ui {
      * For GUI
      * @param tasks List of tasks.
      */
-    public String showListGUI(ArrayList<Task> tasks) {
+    public String showListGui(ArrayList<Task> tasks) {
         String output;
         if (tasks.isEmpty()) {
             output = "List empty! There is nothing to do....";
@@ -175,7 +174,7 @@ public class Ui {
      * @param t Task added.
      * @param size Size of list of task.
      */
-    public String showTaskAddedGUI(Task t, int size) {
+    public String showTaskAddedGui(Task t, int size) {
         String output;
         output = "Aights. Task added:\n";
         output = output + t.toString() + "\n";
@@ -203,7 +202,7 @@ public class Ui {
      * @param t Task deleted.
      * @param size Size of list of tasks.
      */
-    public String showTaskDeletedGUI(Task t, int size) {
+    public String showTaskDeletedGui(Task t, int size) {
         String output;
         output = "Ok! I've removed this task:\n";
         output = output + t.toString() + "\n";
@@ -228,7 +227,7 @@ public class Ui {
      * For GUI.
      * @param t Task to be marked.
      */
-    public String showMarkedGUI(Task t) {
+    public String showMarkedGui(Task t) {
         String output = "Nice! I've marked this task as done:\n";
         output = output + t.toString();
         return output;
@@ -251,7 +250,7 @@ public class Ui {
      * For GUI.
      * @param t Task to be unmarked.
      */
-    public String showUnmarkedGUI(Task t) {
+    public String showUnmarkedGui(Task t) {
         String output = "Nice! I've marked this task as not done yet:\n";
         output = output + t.toString();
         return output;
