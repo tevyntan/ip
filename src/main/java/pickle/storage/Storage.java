@@ -76,34 +76,34 @@ public class Storage {
             boolean done = parts[1].equals("1");
 
             switch(type) {
-                case "T" : {
-                    Task t = new ToDos(parts[2]);
-                    if (done) {
-                        t.mark();
-                    }
-                    tasks.add(t);
-                    break;
+            case "T" : {
+                Task t = new ToDos(parts[2]);
+                if (done) {
+                    t.mark();
                 }
+                tasks.add(t);
+                break;
+            }
 
-                case "D" : {
-                    Task t = new Deadline(parts[2],parts[3]);
-                    if (done) {
-                        t.mark();
-                    }
-                    tasks.add(t);
-                    break;
+            case "D" : {
+                Task t = new Deadline(parts[2],parts[3]);
+                if (done) {
+                    t.mark();
                 }
+                tasks.add(t);
+                break;
+            }
 
-                case "E" : {
-                    Task t = new Event(parts[2], parts[3], parts[4]);
-                    if (done) {
-                        t.mark();
-                    }
-                    tasks.add(t);
-                    break;
+            case "E" : {
+                Task t = new Event(parts[2], parts[3], parts[4]);
+                if (done) {
+                    t.mark();
                 }
-                default:
-                    break;
+                tasks.add(t);
+                break;
+            }
+            default:
+                break;
             }
         }
         return tasks;

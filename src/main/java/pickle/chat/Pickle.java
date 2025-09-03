@@ -60,6 +60,15 @@ public class Pickle {
         }
     }
 
+    public String getResponse(String input) {
+
+        try {
+            return Parser.parseGUI(input, tasks, ui, storage);
+        }catch (Exception e) {
+            return ui.showErrorGUI(e.getMessage());
+        }
+    }
+
     /**
      * Begins the Pickle Chatbot application.
      *
