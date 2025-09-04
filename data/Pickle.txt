@@ -1,3 +1,2 @@
 D | 0 | movie | 2020-04-04 1800
-T | 0 | find nemo
-T | 0 | mathematics
+T | 0 | watch movie

@@ -30,6 +30,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getPickleDialog("Good Morning! I'm Pickle\n" + "What can I do for you?", pickleImage)
+        );
     }
 
     /** Injects the Duke instance */
@@ -47,7 +50,7 @@ public class MainWindow extends AnchorPane {
         String response = pickle.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, pickleImage)
+                DialogBox.getPickleDialog(response, pickleImage)
         );
         userInput.clear();
     }

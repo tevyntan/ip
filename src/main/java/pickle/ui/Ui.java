@@ -47,7 +47,7 @@ public class Ui {
     public void showLine() {
         System.out.println(line);
     }
-
+    
 
     /**
      * Prints a goodbye message when the user terminates Pickle.
