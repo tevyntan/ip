@@ -11,7 +11,7 @@ import pickle.ui.Ui;
 
 /**
  * Start of Pickle Chatbot
- * Pickle chatbot allows users to add, remove, mark and unmark tasks to do in a list
+ * Allows users to add, remove, mark and unmark tasks to do in a list
  * Such tasks include, todos, deadlines and events.
  */
 public class Pickle {
@@ -24,7 +24,7 @@ public class Pickle {
     /**
      * Creates a new instance of the Pickle application.
      *
-     * @param filePath the file path where all tasks are save into and loaded from.
+     * @param filePath the file path where all tasks are saved into and loaded from.
      */
     public Pickle(String filePath) {
         this.ui = new Ui();
