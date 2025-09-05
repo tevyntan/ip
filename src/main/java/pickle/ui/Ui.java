@@ -41,13 +41,13 @@ public class Ui {
     }
 
     /**
-     * Prints a line to seperate each command.
+     * Prints a line to separate each command.
      * For CLI.
      */
     public void showLine() {
         System.out.println(line);
     }
-    
+
 
     /**
      * Prints a goodbye message when the user terminates Pickle.
