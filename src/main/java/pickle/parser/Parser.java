@@ -7,11 +7,7 @@ import java.time.format.DateTimeParseException;
 
 import pickle.exception.PickleException;
 import pickle.storage.Storage;
-import pickle.task.Deadline;
-import pickle.task.Event;
-import pickle.task.Task;
-import pickle.task.TaskList;
-import pickle.task.ToDos;
+import pickle.task.*;
 import pickle.ui.Ui;
 
 /**
@@ -219,6 +215,21 @@ public class Parser {
                     throw new PickleException("There is nothing to do....");
                 }
                 Task t = new ToDos(rests.trim());
+                tasks.add(t);
+                return ui.showTaskAddedGui(t, tasks.size());
+
+            }
+            case "fixed": {
+                if (input.length < 2 || !rests.contains("/for") || rests == null) {
+                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be fixed "
+                            + "<description> /for <duration>");
+                }
+                String[] desc = (rests == null) ? new String[0] : rests.split("\\s*/for\\s*", 2);
+                if (desc.length < 2 || desc[0].isBlank() || desc[1].isBlank()) {
+                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be deadline "
+                            + "<description> /by <date>");
+                }
+                Task t = new Fixed(desc[0].trim(), desc[1].trim());
                 tasks.add(t);
                 return ui.showTaskAddedGui(t, tasks.size());
 
