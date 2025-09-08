@@ -10,8 +10,10 @@ import java.util.List;
 
 import pickle.task.Deadline;
 import pickle.task.Event;
+import pickle.task.Fixed;
 import pickle.task.Task;
 import pickle.task.ToDos;
+
 
 
 /**
@@ -97,6 +99,14 @@ public class Storage {
 
             case "E": {
                 Task t = new Event(parts[2], parts[3], parts[4]);
+                if (done) {
+                    t.mark();
+                }
+                tasks.add(t);
+                break;
+            }
+            case "F": {
+                Task t = new Fixed(parts[2], parts[3]);
                 if (done) {
                     t.mark();
                 }
