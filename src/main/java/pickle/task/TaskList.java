@@ -1,6 +1,7 @@
 package pickle.task;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 /**
  * Represents a list of Tasks.
@@ -23,6 +24,7 @@ public class TaskList {
 
     /**
      * Gets all the tasks.
+     *
      * @return the list of tasks as an ArrayList.
      */
     public ArrayList<Task> all() {
@@ -31,6 +33,7 @@ public class TaskList {
 
     /**
      * Returns number of tasks in the list.
+     *
      * @return Number of tasks.
      */
     public int size() {
@@ -39,6 +42,7 @@ public class TaskList {
 
     /**
      * Removes a task from the list.
+     *
      * @param value the value of which task to remove.
      * @return the task that was deleted.
      */
@@ -48,6 +52,7 @@ public class TaskList {
 
     /**
      * Add the given tasks to the list at the back.
+     *
      * @param t the task that is to be added.
      */
     public void add(Task t) {
@@ -56,6 +61,7 @@ public class TaskList {
 
     /**
      * Retrieves the task at the specific index of the task list.
+     *
      * @param value Index of task.
      * @return The intended task.
      */
@@ -64,6 +70,10 @@ public class TaskList {
         return tasks.get(value - 1);
     }
 
-
-
+    /**
+     * Expose a read-only stream of tasks.
+     */
+    public Stream<Task> stream() {
+        return tasks.stream();
+    }
 }
