@@ -167,7 +167,6 @@ public class Parser {
      * @param storage storage used to store the list in a text file
      * @return string that Pickle outputs to the user in the GUI.
      */
-    
     public static String parseGui(String inputs, TaskList tasks, Ui ui, Storage storage) {
         if (inputs.isEmpty()) {
             ui.showErrorGui("U did not say anything???");
