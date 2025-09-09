@@ -43,7 +43,7 @@ public class Event extends Task {
      * Format to save the file into the storage text file.
      * @return a string to save the file
      */
-    public String fileAdd() {
+    public String writeToFile() {
         String state = super.isComplete() ? "1" : "0";
         return "E | " + state + " | " + getDescription() + " | " + this.from.format(IN_OUT) + " | "
                 + this.to.format(IN_OUT);
