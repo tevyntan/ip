@@ -48,6 +48,7 @@ test {
 
 application {
     mainClass.set("pickle.ui.Launcher")
+    applicationDefaultJvmArgs = ["-ea"]
 }
 
 shadowJar {
