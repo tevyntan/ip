@@ -4,10 +4,16 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.stream.Collectors;
 
 import pickle.exception.PickleException;
 import pickle.storage.Storage;
-import pickle.task.*;
+import pickle.task.Deadline;
+import pickle.task.Event;
+import pickle.task.Fixed;
+import pickle.task.Task;
+import pickle.task.TaskList;
+import pickle.task.ToDos;
 import pickle.ui.Ui;
 
 /**
@@ -275,14 +281,11 @@ public class Parser {
                 String keyword = rests.toLowerCase();
                 int i = 1;
                 String output = ui.showFindGui() + "\n";
-                for (Task t : tasks.all()) {
-                    if (t.getDescription().toLowerCase().contains(keyword)) {
-                        output = output + ui.showGui(i + ". " + t.toString() + "\n");
-                        i++;
-                    }
-
-
-                }
+                String body = tasks.stream()
+                        .filter(t -> t.getDescription().toLowerCase().contains(keyword.toLowerCase()))
+                        .map(Task::toString)
+                        .collect(Collectors.joining(System.lineSeparator()));
+                output = output + (body.isBlank() ? "No matching tasks found." : body);
                 return output;
             }
 
