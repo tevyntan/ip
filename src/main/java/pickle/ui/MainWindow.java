@@ -41,6 +41,7 @@ public class MainWindow extends AnchorPane {
     /** Injects the Pickle instance */
     public void setPickle(Pickle d) {
         pickle = d;
+        assert pickle != null : "Pickle not successfully loaded.";
     }
 
     /**
