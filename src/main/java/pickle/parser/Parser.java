@@ -169,6 +169,7 @@ public class Parser {
         String[] input = line.split("\\s+", 2);
 
         String command = input[0];
+        assert command != null && !command.isBlank() : "There is no command word";
         String rests = (input.length > 1) ? input[1] : "";
         try {
             switch (command) {
