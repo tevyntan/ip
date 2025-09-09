@@ -159,8 +159,9 @@ public class Parser {
      * @param tasks List of task that Pickle currently has saved.
      * @param ui User interface to print the messages.
      * @param storage storage used to store the list in a text file
-     * @return true if the command is "bye" in order to exit the loop in Pickle
+     * @return string that Pickle outputs to the user in the GUI.
      */
+    
     public static String parseGui(String inputs, TaskList tasks, Ui ui, Storage storage) {
         if (inputs.isEmpty()) {
             ui.showErrorGui("U did not say anything???");

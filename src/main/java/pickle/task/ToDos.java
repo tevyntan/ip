@@ -21,7 +21,7 @@ public class ToDos extends Task {
      * Format to save the file into the storage text file.
      * @return a string to save the file
      */
-    public String fileAdd() {
+    public String writeToFile() {
         String state = super.isComplete() ? "1" : "0";
         return "T | " + state + " | " + getDescription();
     }

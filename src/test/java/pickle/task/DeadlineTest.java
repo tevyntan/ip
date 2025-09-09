@@ -17,7 +17,7 @@ class DeadlineTest {
 
 
         // fileAdd should give the same as what is inputted so that can load safely
-        String saved = d.fileAdd();
+        String saved = d.writeToFile();
         assertTrue(saved.endsWith("2019-12-04 1800"));
     }
 

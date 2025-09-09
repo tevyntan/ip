@@ -44,7 +44,7 @@ public class Storage {
         List<String> lists = new ArrayList<>();
 
         for (Task t : list) {
-            String line = t.fileAdd();
+            String line = t.writeToFile();
             lists.add(line);
         }
 
@@ -75,6 +75,10 @@ public class Storage {
 
             String[] parts = line.split("\\s*\\|\\s*");
 
+            //Check if any line read is at least long enough to be valid.
+            if (parts.length < 3) {
+                continue;
+            }
             String type = parts[0];
             boolean done = parts[1].equals("1");
 

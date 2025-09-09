@@ -4,7 +4,7 @@ package pickle.task;
  * Abstract class of a Task to have all the basic methods that a task can execute.
  */
 public abstract class Task {
-    private String description;
+    private final String description;
     private boolean isComplete;
 
     /**
@@ -36,11 +36,9 @@ public abstract class Task {
         return this.description;
     }
 
-    public String type() {
-        return " ";
-    }
+    public abstract String type();
 
-    public abstract String fileAdd();
+    public abstract String writeToFile();
 
     @Override
     public String toString() {
