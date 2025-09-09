@@ -60,6 +60,7 @@ public class TaskList {
      * @return The intended task.
      */
     public Task get(int value) {
+        assert value >= 0 && value < tasks.size() : "Value inputted is out of range";
         return tasks.get(value - 1);
     }
 
