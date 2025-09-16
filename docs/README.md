@@ -1,6 +1,6 @@
 # Pickle User Guide
 
-![img_1.png](img_1.png)
+![img_1.png](Ui.png)
 
 Welcome to **Pickle**!  
 Pickle is a simple, friendly chatbot that helps you keep track of your tasks.
@@ -35,9 +35,9 @@ Adds a task that must be completed by a specific date.
 ### Add an Event
 Adds a task that happens at a specific time or date.  
 **Format:**  
-`event <description> /at <yyyy-mm-dd HHmm>`  
+`event <description> /from <yyyy-mm-dd HHmm> /to <yyyy-mm-dd HHmm>`  
 **Example:**  
-`event project meeting /at 2025-09-20 1800`
+`event project meeting /from 2025-09-20 1800 /to 2025-09-20 2000`
 
 ### Add a fixed duration task
 Adds a task that requires a specific duration to be done.  
@@ -79,6 +79,12 @@ Shows tasks that contain the given keyword.
 **Example:**  
 `find book`
 
+### Saving
+Pickle data are saved in the hard disk 
+automatically within a folder called 'data' 
+after any command that changes
+the data. There is no need to save manually.
+
 ### Exit the Program
 Closes the chatbot.  
 **Format:**  
@@ -89,3 +95,19 @@ If you type something invalid, Pickle will warn you.
 **Example:**  
 Input: `foo bar`  
 Output: `Yikes!!! foo bar  Try Again!!`
+
+## Command Summary
+
+| Action             | Format, Examples                                                                                     |
+|--------------------|------------------------------------------------------------------------------------------------------|
+| **Todo**           | `todo DESCRIPTION`<br>e.g., `todo read book`                                                         |
+| **Deadline**       | `deadline DESCRIPTION /by yyyy-mm-dd HHmm`<br>e.g., `deadline submit report /by 2025-09-30 1800`     |
+| **Event**          | `event <description> /from <yyyy-mm-dd HHmm> /to <yyyy-mm-dd HHmm>`<br>e.g., `event project meeting /from 2025-09-20 1800 /to 2025-09-20 2000`         |
+| **Fixed**          | `fixed <description> /for <duration in hours>`<br>e.g., `fixed assignment /for 5`         |
+| **List**           | `list`                                                                                               |
+| **Mark**           | `mark INDEX`<br>e.g., `mark 2`                                                                       |
+| **Unmark**         | `unmark INDEX`<br>e.g., `unmark 2`                                                                   |
+| **Delete**         | `delete INDEX`<br>e.g., `delete 3`                                                                   |
+| **Find**           | `find KEYWORD`<br>e.g., `find book`                                                                  |
+| **Exit**           | `bye`                                                                                                |
+| **Error Handling** | Invalid commands will trigger an error message.<br>e.g., `foo bar` → `Yikes!!! foo bar  Try Again!!` |
