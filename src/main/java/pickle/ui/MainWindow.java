@@ -51,11 +51,26 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+
         String response = pickle.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getPickleDialog(response, pickleImage)
-        );
+        String[] seperated = response.split("!", 2);
+        if (seperated[0].equals("Yikes")) {
+            DialogBox errorBox = DialogBox.getPickleDialog(response,
+                    pickleImage
+            );
+            // Add the "error" CSS class so it picks up your red style
+            errorBox.lookup(".label").getStyleClass().add("error");
+
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    errorBox
+            );
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getPickleDialog(response, pickleImage) // normal bot reply
+            );
+        }
         userInput.clear();
     }
 }

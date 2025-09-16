@@ -51,3 +51,36 @@
     -fx-opacity: 0;
 }
 
+.dialog-box { /* HBox root */
+  -fx-padding: 4 8;
+  -fx-spacing: 8;
+}
+
+.bubble {
+  -fx-padding: 8 10;
+  -fx-background-radius: 12;
+  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 1);
+  -fx-font-size: 13px;
+}
+
+.bubble.user {
+  -fx-background-color: #3A86FF;
+  -fx-text-fill: white;
+}
+
+.bubble.bot {
+  -fx-background-color: linear-gradient(to bottom, #F4F6F8, #ECEFF2);
+  -fx-text-fill: -fx-text-base-color;
+}
+
+.bubble.error {
+  -fx-background-color: #FDECEC;
+  -fx-text-fill: #7A2D2D;
+  -fx-border-color: #E53935;
+  -fx-border-width: 4 4 4 4;
+  -fx-border-radius: 10 0 0 10;
+}
+
+.reply-label.error {
+  -fx-font-weight: bold;
+}
