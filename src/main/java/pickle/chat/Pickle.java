@@ -62,8 +62,12 @@ public class Pickle {
         }
     }
 
+    /**
+     * Gets the response of the Pickle bot based on the inputted string the user keys in.
+     * @param input The command that the users has entered.
+     * @return a string that the Pickle bot will reply based on the input.
+     */
     public String getResponse(String input) {
-
         try {
             return Parser.parseGui(input, tasks, ui, storage);
         } catch (Exception e) {

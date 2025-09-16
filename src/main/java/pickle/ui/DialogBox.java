@@ -35,6 +35,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.getStyleClass().add("bubble");
         displayPicture.setImage(img);
     }
 
