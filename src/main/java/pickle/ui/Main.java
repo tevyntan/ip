@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import pickle.chat.Pickle;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Pickle using FXML.
  */
 public class Main extends Application {
 
