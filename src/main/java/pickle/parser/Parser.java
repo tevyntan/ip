@@ -181,130 +181,134 @@ public class Parser {
             switch (command) {
             case "bye":
                 return ui.showByeGui();
-
-
-
             case "list":
                 return ui.showListGui(tasks.all());
-
-
-            case "mark": {
-                if (input.length < 2 || rests.trim().isEmpty()) {
-                    throw new PickleException("Please specify which task to mark....");
-                }
-                Task t = tasks.get(Integer.parseInt(rests));
-                t.mark();
-                return ui.showMarkedGui(t);
-
-            }
-            case "unmark": {
-                if (input.length < 2 || rests.trim().isEmpty()) {
-                    throw new PickleException("Please specify which task to unmark....");
-                }
-
-                Task t = tasks.get(Integer.parseInt(rests));
-                t.unmark();
-                return ui.showUnmarkedGui(t);
-
-            }
-            case "delete": {
-                if (input.length < 2 || rests.trim().isEmpty() || Integer.parseInt(rests) > tasks.size()) {
-                    throw new PickleException("Please specify which task to delete....");
-                }
-
-                Task t = tasks.get(Integer.parseInt(rests));
-                tasks.delete(Integer.parseInt(rests));
-                return ui.showTaskDeletedGui(t, tasks.size());
-
-            }
-            case "todo": {
-                if (input.length < 2 || rests.trim().isEmpty()) {
-                    throw new PickleException("There is nothing to do....");
-                }
-                Task t = new ToDos(rests.trim());
-                tasks.add(t);
-                return ui.showTaskAddedGui(t, tasks.size());
-
-            }
-            case "fixed": {
-                if (input.length < 2 || !rests.contains("/for") || rests == null) {
-                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be fixed "
-                            + "<description> /for <duration>");
-                }
-                String[] desc = (rests == null) ? new String[0] : rests.split("\\s*/for\\s*", 2);
-                if (desc.length < 2 || desc[0].isBlank() || desc[1].isBlank()) {
-                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be deadline "
-                            + "<description> /by <date>");
-                }
-                Task t = new Fixed(desc[0].trim(), desc[1].trim());
-                tasks.add(t);
-                return ui.showTaskAddedGui(t, tasks.size());
-
-            }
-            case "deadline": {
-                String[] desc = (rests == null) ? new String[0] : rests.split("\\s*/by\\s*", 2);
-                if (desc.length < 2 || desc[0].isBlank() || desc[1].isBlank()) {
-                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be deadline "
-                            + "<description> /by <date>");
-                }
-                try {
-                    LocalDateTime.parse(desc[1].trim(), IN_OUT).withSecond(0).withNano(0);
-                } catch (DateTimeParseException ignore) {
-                    throw new PickleException("Use format yyyy-MM-dd HHmm, e.g., 2019-12-02 1800");
-                }
-                Task t = new Deadline(desc[0].trim(), desc[1].trim());
-                tasks.add(t);
-                return ui.showTaskAddedGui(t, tasks.size());
-
-            }
-            case "event": {
-                if (input.length < 2 || !rests.contains("/from") || !rests.contains("/to") || rests == null) {
-                    throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be event "
-                            + "<description> /from <time> /to <time>");
-                }
-                String[] d = input[1].split("\\s*/from\\s*", 2);
-                String[] e = d[1].split("\\s*/to\\s*", 2);
-                try {
-                    LocalDateTime.parse(e[0].trim(), IN_OUT).withSecond(0).withNano(0);
-                    LocalDateTime.parse(e[1].trim(), IN_OUT).withSecond(0).withNano(0);
-                } catch (DateTimeParseException ignore) {
-                    throw new PickleException("Use format yyyy-MM-dd HHmm, e.g., 2019-12-02 1800");
-                }
-                Task t = new Event(d[0].trim(), e[0].trim(), e[1].trim());
-                tasks.add(t);
-                return ui.showTaskAddedGui(t, tasks.size());
-
-            }
-            case "find": {
-                if (rests.isBlank()) {
-                    throw new PickleException("No keyword to find....");
-                }
-                String keyword = rests.toLowerCase();
-                int i = 1;
-                String output = ui.showFindGui() + "\n";
-                String body = tasks.stream()
-                        .filter(t -> t.getDescription().toLowerCase().contains(keyword.toLowerCase()))
-                        .map(Task::toString)
-                        .collect(Collectors.joining(System.lineSeparator()));
-                output = output + (body.isBlank() ? "No matching tasks found." : body);
-                return output;
-            }
-
+            case "mark":
+                return handleMark(rests, tasks, ui);
+            case "unmark":
+                return handleUnmark(rests, tasks, ui);
+            case "delete":
+                return handleDelete(rests, tasks, ui);
+            case "todo":
+                return handleTodo(rests, tasks, ui);
+            case "fixed":
+                return handleFixed(rests, tasks, ui);
+            case "deadline":
+                return handleDeadline(rests, tasks, ui);
+            case "event":
+                return handleEvent(rests, tasks, ui);
+            case "find":
+                return handleFind(rests, tasks, ui);
             default:
                 return ui.showErrorGui("My bad, I don't know what that means.");
-
             }
         } catch (PickleException e) {
             return ui.showErrorGui(e.getMessage());
-
         } finally {
             try {
                 storage.save(tasks.all());
             } catch (IOException io) {
                 return "ERROR!!" + io.getMessage();
             }
-
         }
+    }
+
+    private static String handleMark(String rests, TaskList tasks, Ui ui) throws PickleException {
+        if (rests == null || rests.trim().isEmpty()) {
+            throw new PickleException("Please specify which task to mark....");
+        }
+        Task t = tasks.get(Integer.parseInt(rests));
+        t.mark();
+        return ui.showMarkedGui(t);
+    }
+
+    private static String handleUnmark(String rests, TaskList tasks, Ui ui) throws PickleException {
+        if (rests == null || rests.trim().isEmpty()) {
+            throw new PickleException("Please specify which task to unmark....");
+        }
+        Task t = tasks.get(Integer.parseInt(rests));
+        t.unmark();
+        return ui.showUnmarkedGui(t);
+    }
+
+    private static String handleDelete(String rests, TaskList tasks, Ui ui) throws PickleException {
+        if (rests == null || rests.trim().isEmpty() || Integer.parseInt(rests) > tasks.size()) {
+            throw new PickleException("Please specify which task to delete....");
+        }
+        Task t = tasks.get(Integer.parseInt(rests));
+        tasks.delete(Integer.parseInt(rests));
+        return ui.showTaskDeletedGui(t, tasks.size());
+    }
+
+    private static String handleTodo(String rests, TaskList tasks, Ui ui) throws PickleException {
+        if (rests == null || rests.trim().isEmpty()) {
+            throw new PickleException("There is nothing to do....");
+        }
+        Task t = new ToDos(rests.trim());
+        tasks.add(t);
+        return ui.showTaskAddedGui(t, tasks.size());
+    }
+
+    private static String handleFixed(String rests, TaskList tasks, Ui ui) throws PickleException {
+        if (rests == null || !rests.contains("/for")) {
+            throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be fixed "
+                    + "<description> /for <duration>");
+        }
+        String[] desc = rests.split("\\s*/for\\s*", 2);
+        if (desc.length < 2 || desc[0].isBlank() || desc[1].isBlank()) {
+            throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be deadline "
+                    + "<description> /by <date>");
+        }
+        Task t = new Fixed(desc[0].trim(), desc[1].trim());
+        tasks.add(t);
+        return ui.showTaskAddedGui(t, tasks.size());
+    }
+
+    private static String handleDeadline(String rests, TaskList tasks, Ui ui) throws PickleException {
+        String[] desc = (rests == null) ? new String[0] : rests.split("\\s*/by\\s*", 2);
+        if (desc.length < 2 || desc[0].isBlank() || desc[1].isBlank()) {
+            throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be deadline "
+                    + "<description> /by <date>");
+        }
+        try {
+            // validate date/time format with your existing formatter
+            LocalDateTime.parse(desc[1].trim(), IN_OUT).withSecond(0).withNano(0);
+        } catch (DateTimeParseException ignore) {
+            throw new PickleException("Use format yyyy-MM-dd HHmm, e.g., 2019-12-02 1800");
+        }
+        Task t = new Deadline(desc[0].trim(), desc[1].trim());
+        tasks.add(t);
+        return ui.showTaskAddedGui(t, tasks.size());
+    }
+
+    private static String handleEvent(String rests, TaskList tasks, Ui ui) throws PickleException {
+        if (rests == null || !rests.contains("/from") || !rests.contains("/to")) {
+            throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be event "
+                    + "<description> /from <time> /to <time>");
+        }
+        String[] d = rests.split("\\s*/from\\s*", 2);
+        String[] e = d[1].split("\\s*/to\\s*", 2);
+        try {
+            LocalDateTime.parse(e[0].trim(), IN_OUT).withSecond(0).withNano(0);
+            LocalDateTime.parse(e[1].trim(), IN_OUT).withSecond(0).withNano(0);
+        } catch (DateTimeParseException ignore) {
+            throw new PickleException("Use format yyyy-MM-dd HHmm, e.g., 2019-12-02 1800");
+        }
+        Task t = new Event(d[0].trim(), e[0].trim(), e[1].trim());
+        tasks.add(t);
+        return ui.showTaskAddedGui(t, tasks.size());
+    }
+
+    private static String handleFind(String rests, TaskList tasks, Ui ui) throws PickleException {
+        if (rests == null || rests.isBlank()) {
+            throw new PickleException("No keyword to find....");
+        }
+        String header = ui.showFindGui() + "\n";
+        String body = tasks.stream()
+                .filter(t -> t.getDescription().toLowerCase().contains(rests.toLowerCase()))
+                .map(Task::toString)
+                .collect(Collectors.joining(System.lineSeparator()));
+        return header + (body.isBlank() ? "No matching tasks found." : body);
     }
 }
 
