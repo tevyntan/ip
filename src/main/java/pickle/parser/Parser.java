@@ -164,7 +164,7 @@ public class Parser {
      * @param inputs line typed by the user that is scanned by the ui.
      * @param tasks List of task that Pickle currently has saved.
      * @param ui User interface to print the messages.
-     * @param storage storage used to store the list in a text file
+     * @param storage storage used to store the list in a text file.
      * @return string that Pickle outputs to the user in the GUI.
      */
     public static String parseGui(String inputs, TaskList tasks, Ui ui, Storage storage) {
