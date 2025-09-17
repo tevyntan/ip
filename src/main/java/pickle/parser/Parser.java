@@ -213,6 +213,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Marks a task as done.
+     * @param rests command string.
+     * @param tasks list of tasks.
+     * @param ui Ui helper used to get the proper messages.
+     * @return formatted GUI string for a successful operation.
+     * @throws PickleException if input String rests is invalid.
+     */
     private static String handleMark(String rests, TaskList tasks, Ui ui) throws PickleException {
         if (rests == null || rests.trim().isEmpty()) {
             throw new PickleException("Please specify which task to mark....");
@@ -222,6 +230,14 @@ public class Parser {
         return ui.showMarkedGui(t);
     }
 
+    /**
+     * Marks a task as not done.
+     * @param rests command string.
+     * @param tasks list of tasks.
+     * @param ui Ui helper used to get the proper messages.
+     * @return formatted GUI string for a successful operation.
+     * @throws PickleException if input String rests is invalid.
+     */
     private static String handleUnmark(String rests, TaskList tasks, Ui ui) throws PickleException {
         if (rests == null || rests.trim().isEmpty()) {
             throw new PickleException("Please specify which task to unmark....");
@@ -231,6 +247,14 @@ public class Parser {
         return ui.showUnmarkedGui(t);
     }
 
+    /**
+     * Deletes a task.
+     * @param rests command string.
+     * @param tasks list of tasks.
+     * @param ui Ui helper used to get the proper messages.
+     * @return formatted GUI string for a successful operation.
+     * @throws PickleException if input String rests is invalid.
+     */
     private static String handleDelete(String rests, TaskList tasks, Ui ui) throws PickleException {
         if (rests == null || rests.trim().isEmpty() || Integer.parseInt(rests) > tasks.size()) {
             throw new PickleException("Please specify which task to delete....");
@@ -240,6 +264,14 @@ public class Parser {
         return ui.showTaskDeletedGui(t, tasks.size());
     }
 
+    /**
+     * Adds a todo task.
+     * @param rests command string.
+     * @param tasks list of tasks.
+     * @param ui Ui helper used to get the proper messages.
+     * @return formatted GUI string for a successful operation.
+     * @throws PickleException if input String rests is invalid.
+     */
     private static String handleTodo(String rests, TaskList tasks, Ui ui) throws PickleException {
         if (rests == null || rests.trim().isEmpty()) {
             throw new PickleException("There is nothing to do....");
@@ -249,6 +281,14 @@ public class Parser {
         return ui.showTaskAddedGui(t, tasks.size());
     }
 
+    /**
+     * Adds a fixed duration task.
+     * @param rests command string.
+     * @param tasks list of tasks.
+     * @param ui Ui helper used to get the proper messages.
+     * @return formatted GUI string for a successful operation.
+     * @throws PickleException if input String rests is invalid.
+     */
     private static String handleFixed(String rests, TaskList tasks, Ui ui) throws PickleException {
         if (rests == null || !rests.contains("/for")) {
             throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be fixed "
@@ -264,6 +304,14 @@ public class Parser {
         return ui.showTaskAddedGui(t, tasks.size());
     }
 
+    /**
+     * Adds a task with a deadline.
+     * @param rests command string.
+     * @param tasks list of tasks.
+     * @param ui Ui helper used to get the proper messages.
+     * @return formatted GUI string for a successful operation.
+     * @throws PickleException if input String rests is invalid.
+     */
     private static String handleDeadline(String rests, TaskList tasks, Ui ui) throws PickleException {
         String[] desc = (rests == null) ? new String[0] : rests.split("\\s*/by\\s*", 2);
         if (desc.length < 2 || desc[0].isBlank() || desc[1].isBlank()) {
@@ -281,6 +329,14 @@ public class Parser {
         return ui.showTaskAddedGui(t, tasks.size());
     }
 
+    /**
+     * Adds an event task.
+     * @param rests command string.
+     * @param tasks list of tasks.
+     * @param ui Ui helper used to get the proper messages.
+     * @return formatted GUI string for a successful operation.
+     * @throws PickleException if input String rests is invalid.
+     */
     private static String handleEvent(String rests, TaskList tasks, Ui ui) throws PickleException {
         if (rests == null || !rests.contains("/from") || !rests.contains("/to")) {
             throw new PickleException("I'm sorry, I'm not sure what you meant. Format should be event "
@@ -299,6 +355,14 @@ public class Parser {
         return ui.showTaskAddedGui(t, tasks.size());
     }
 
+    /**
+     * Finds all tasks that contain the same contents as the input String.
+     * @param rests command string.
+     * @param tasks list of tasks.
+     * @param ui Ui helper used to get the proper messages.
+     * @return formatted GUI string for a successful operation.
+     * @throws PickleException if input String rests is invalid.
+     */
     private static String handleFind(String rests, TaskList tasks, Ui ui) throws PickleException {
         if (rests == null || rests.isBlank()) {
             throw new PickleException("No keyword to find....");
