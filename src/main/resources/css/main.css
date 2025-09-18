@@ -78,7 +78,7 @@
   -fx-text-fill: #7A2D2D;
   -fx-border-color: #E53935;
   -fx-border-width: 4 4 4 4;
-  -fx-border-radius: 10 0 0 10;
+  -fx-border-radius: 10 10 10 10;
 }
 
 .reply-label.error {

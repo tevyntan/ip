@@ -22,6 +22,11 @@ import pickle.task.ToDos;
  */
 public class Storage {
 
+    private static final String SEP_REGEX = "\\s*\\|\\s*";
+    private static final String TYPE_TODO = "T";
+    private static final String TYPE_DEADLINE = "D";
+    private static final String TYPE_EVENT = "E";
+    private static final String TYPE_FIXED = "F";
     private final Path fileLocation;
 
     /**
@@ -51,76 +56,94 @@ public class Storage {
         Files.write(fileLocation, lists, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
 
     }
-
     /**
-     * Load the list of tasks from a pre-existing text file.
-     * Return empty list if text file does not exist.
-     * @return tasks loaded from the disk.
-     * @throws IOException if reading the file fails.
+     * Loads tasks from disk as an ArrayList.
+     * @return List of tasks.
+     * @throws IOException Exception raised.
      */
     public ArrayList<Task> load() throws IOException {
+        ensureFileExists();
         ArrayList<Task> tasks = new ArrayList<>();
-        List<String> empty = new ArrayList<>();
-        Files.createDirectories(fileLocation.getParent());
-
-        if (!Files.exists(fileLocation)) {
-            Files.write(fileLocation, empty, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-            return tasks;
-        }
-
         for (String line : Files.readAllLines(fileLocation)) {
-            if (line == null || line.isBlank()) {
-                continue;
-            }
-
-            String[] parts = line.split("\\s*\\|\\s*");
-
-            //Check if any line read is at least long enough to be valid.
-            if (parts.length < 3) {
-                continue;
-            }
-            String type = parts[0];
-            boolean done = parts[1].equals("1");
-
-            switch(type) {
-            case "T": {
-                Task t = new ToDos(parts[2]);
-                if (done) {
-                    t.mark();
-                }
+            Task t = parseTask(line);
+            if (t != null) {
                 tasks.add(t);
-                break;
-            }
-
-            case "D": {
-                Task t = new Deadline(parts[2], parts[3]);
-                if (done) {
-                    t.mark();
-                }
-                tasks.add(t);
-                break;
-            }
-
-            case "E": {
-                Task t = new Event(parts[2], parts[3], parts[4]);
-                if (done) {
-                    t.mark();
-                }
-                tasks.add(t);
-                break;
-            }
-            case "F": {
-                Task t = new Fixed(parts[2], parts[3]);
-                if (done) {
-                    t.mark();
-                }
-                tasks.add(t);
-                break;
-            }
-            default:
-                break;
             }
         }
         return tasks;
     }
+    /**
+     * Ensure that the file being read exists, if not throw exception.
+     * @throws IOException thrown when file does not exist.
+     */
+    private void ensureFileExists() throws IOException {
+        Files.createDirectories(fileLocation.getParent());
+        if (Files.notExists(fileLocation)) {
+            Files.write(fileLocation, java.util.List.of(),
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        }
+    }
+
+
+    /**
+     * Parse the tasks that is mentioned in the input.
+     * @param line Input of what the task is.
+     * @return Task that has been created and add into the task list.
+     */
+    private Task parseTask(String line) {
+        if (line == null || line.isBlank()) {
+            return null;
+        }
+
+        String[] parts = line.split(SEP_REGEX);
+        if (parts.length < 3) {
+            return null; // need: type | done | description
+        }
+
+        boolean done = "1".equals(parts[1]);
+        Task t = buildTask(parts);
+        if (t == null) {
+            return null;
+        }
+
+        if (done) {
+            t.mark();
+        }
+        return t;
+    }
+
+    /**
+     * Builds a Task from split parts. Returns null if malformed/unknown.
+     * Formats:
+     *  T | 0/1 | desc
+     *  D | 0/1 | desc | by
+     *  E | 0/1 | desc | at
+     *  F | 0/1 | desc | when
+     * @param p Take an array of string that has been split to properly create the tasks.
+     * @return A task that has been created.
+     */
+    private Task buildTask(String[] p) {
+        switch (p[0]) {
+        case TYPE_TODO:
+            return new ToDos(p[2]);
+        case TYPE_DEADLINE:
+            if (p.length < 4) {
+                return null;
+            }
+            return new Deadline(p[2], p[3]);
+        case TYPE_EVENT:
+            if (p.length < 4) {
+                return null;
+            }
+            return new Event(p[2], p[3], p[4]);
+        case TYPE_FIXED:
+            if (p.length < 4) {
+                return null;
+            }
+            return new Fixed(p[2], p[3]);
+        default:
+            return null;
+        }
+    }
+
 }

@@ -14,7 +14,7 @@ public class Ui {
 
     /**
      * Using scanner to read the command given by the user.
-     * @return
+     * @return string that user inputted.
      */
     public String readComment() {
         return sc.nextLine().trim();
